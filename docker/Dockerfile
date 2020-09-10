@@ -43,6 +43,10 @@ RUN if [ "${cloud_build}" = true ]; then github_branch="${release_version}" && \
 
 RUN cd /pytorch && bash xla/scripts/build_torch_wheels.sh ${python_version} ${release_version}
 
+RUN apt-get autoremove -y && \
+  apt-get clean && \
+  rm -rf /root/.cache
+
 # Use conda environment on startup or when running scripts.
 RUN echo "conda activate pytorch" >> ~/.bashrc
 RUN echo "export TF_CPP_LOG_THREAD_ID=1" >> ~/.bashrc
