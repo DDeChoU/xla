@@ -45,7 +45,10 @@ RUN cd /pytorch && bash xla/scripts/build_torch_wheels.sh ${python_version} ${re
 
 RUN apt-get autoremove -y && \
   apt-get clean && \
-  rm -rf /root/.cache
+  rm -rf /root/.cache && \
+  rm -rf /pytorch/build && \
+  rm -rf /pytorch/xla/build && \
+  rm -rf /pytorch/vision/build
 
 # Use conda environment on startup or when running scripts.
 RUN echo "conda activate pytorch" >> ~/.bashrc
