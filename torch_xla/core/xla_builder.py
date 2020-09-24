@@ -138,6 +138,10 @@ class Op(object):
   def __mul__(self, rhs):
     return mkop('Mul', (self.op, rhs.op))
 
+  def __mul_add__(self, rhs):
+     temp = mkop('Mul', (self.op, rhs.op))
+     return mkop('Add', (temp.op, rhs.op))
+
   def __matmul__(self, rhs):
     return mkop('Dot', (self.op, rhs.op))
 
